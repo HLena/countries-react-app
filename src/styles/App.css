@@ -15,6 +15,19 @@
   pointer-events: none;
 }
 
+
+.is-dark-mode {
+  --black: white;
+  --white: #273542;
+  --background: #1a2833;
+}
+
+.is-light-mode {
+  --black: #111517;
+  --white: white;
+  --background: #fafafa;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;

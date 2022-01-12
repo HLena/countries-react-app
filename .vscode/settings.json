@@ -1,0 +1,5 @@
+{
+    "editor.fontFamily": "'Victor Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    "terminal.integrated.automationShell.linux": ""
+}

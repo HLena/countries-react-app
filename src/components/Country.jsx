@@ -1,10 +1,9 @@
 import styled from 'styled-components'
+import { useSelector } from 'react-redux';
 
 const CountryStyled = styled.div`
     width: 264px;
-    border: 1px solid #eee;
     border-radius: 5px;
-    background: white;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     img {
         width: 100%;
@@ -25,9 +24,10 @@ const CountryStyled = styled.div`
         margin-bottom: .5rem;
     }
     button{
-        width: 60%;
+        width: 80%;
         display: block;
         margin: auto;
+        margin-bottom: 1rem;
         padding: 8px 16px;
         border: none;
         color: white;
@@ -36,20 +36,36 @@ const CountryStyled = styled.div`
         border-radius: 5px;
         outline: none;
     }
+    ${({theme}) => {
+        if(theme === 'light') {
+            return `
+                background: white;
+                color: #333;
+            `
+        } else {
+            return `
+                background: #273542;
+                color: white;
+            `
+        }
+    }}
 `
 
 
 export const Country = ({name, flag, capital, region, population}) => {
+
+    const { theme } = useSelector( state => state.ui );
+
     return (
-        <CountryStyled>
+        <CountryStyled theme={theme}>
             <img src={flag} alt={`${name}-country`} />
             <div className = "details">
                 <h2>{name}</h2>
                 <p><strong>Capital: </strong>{capital}</p>
-                <p><strong>Región: </strong>{region}</p>
+                <p><strong>Region: </strong>{region}</p>
                 <p><strong>Population: </strong>{population}</p>
-                <button>Ver Más</button>
             </div>
+            <button>See More</button>
         </CountryStyled>
     )
 }

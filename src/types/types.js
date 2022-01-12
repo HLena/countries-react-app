@@ -17,6 +17,7 @@ export const types = {
     // notesDeleted: '[Notes] Delete Note',
     // notesLogoutCleaning: '[Notes] Logout cleaning'
 
+    uiTheme: '[UI] Set Theme', 
     countriesLoad: '[Countries] loading Countries'
 
 }
