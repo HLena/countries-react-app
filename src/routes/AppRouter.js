@@ -1,32 +1,55 @@
 import React, { useEffect, useState } from 'react';
 import {
     BrowserRouter as Router,
-    Switch,
-    Redirect
+    Routes,
+    Route
   } from 'react-router-dom';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CountryRoute } from './CountryRoute';
+import { CountriesRoute } from './CountriesRoute';
+import styled from 'styled-components';
+import { AppBar } from '../components/AppBar';
+import { startLoadingData } from '../actions/countries';
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { AuthRouter } from './AuthRouter';
-import { PrivateRoute } from './PrivateRoute';
 
-import { JournalScreen } from '../components/journal/JournalScreen';
-import { login } from '../actions/auth';
-import { PublicRoute } from './PublicRoute';
-import { startLoadingNotes } from '../actions/notes';
+
+
+const Layout = styled.div`
+    width: 100%;
+    margin: 0;
+    ${({theme}) => {
+        if(theme === 'light') {
+            return `
+                background: #fafafa;
+                color: #333;
+            `
+        } else {
+            return `
+                background: #1a2833;
+                color: white;
+            `
+        }
+    }}
+    min-height: 100vh;
+    height: auto;
+    
+`;
 
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
+    const { theme } = useSelector( state => state.ui );
+
 
     const [ checking, setChecking ] = useState(true);
 
 
 
     useEffect(() => {
-        
-    }, [ ])
+        dispatch(startLoadingData());
+        setChecking(false);
+    }, [dispatch])
 
 
     if ( checking ) {
@@ -38,26 +61,25 @@ export const AppRouter = () => {
     
     return (
         <Router>
-            <div>
-                <Switch>
-                    <PublicRoute 
-                        path="/countries"
-                        component={ AuthRouter }
-                        isAuthenticated={ isLoggedIn }
-                    />
+            <Layout theme = {theme}>
+                <AppBar/>
+                <div>
+                    <Routes>
+                        <Route 
+                            path = "/countries"
+                            element = { <CountriesRoute/>}
+                        >
+                        </Route>
+                        <Route
+                            exact 
+                            path = "/countries/:countryName"
+                            element = {<CountryRoute/> }
+                        />
 
-                    <PrivateRoute 
-                        exact
-                        isAuthenticated={ isLoggedIn }
-                        path="/"
-                        component={ JournalScreen }
-                    />
-
-                    <Redirect to="/auth/login" />
-
-
-                </Switch>
-            </div>
+                    </Routes>
+                    
+                </div>
+            </Layout>
         </Router>
     )
 }
