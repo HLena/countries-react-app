@@ -12,16 +12,18 @@ const CountriesStyled = styled.div`
     padding: 25px;
     display: flex;
     flex-wrap:wrap;
-    justify-content: space-between;
     gap: 1.5rem;
+    justify-content: center;
+    @media (min-width: 900px) {
+        justify-content: space-between;
+
+    }
 `;
 
 export const CountriesRoute = () => {
 
 
-    const dispatch = useDispatch();
     const { countries } = useSelector( state => state.countries );
-    // console.log(countries[0])
 
     return (
         <>
