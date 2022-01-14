@@ -18,6 +18,8 @@ export const types = {
     // notesLogoutCleaning: '[Notes] Logout cleaning'
 
     uiTheme: '[UI] Set Theme', 
-    countriesLoad: '[Countries] loading Countries'
+    countriesLoad: '[Countries] loading Countries',
+    countriesSetName: '[Countries] set Name',
+    countriesSetRegion :'[Countries] set Region'
 
 }

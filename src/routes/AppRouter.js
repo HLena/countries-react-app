@@ -39,7 +39,7 @@ const Layout = styled.div`
 export const AppRouter = () => {
 
     const dispatch = useDispatch();
-    const { theme } = useSelector( state => state.ui );
+    const { ui: { theme }, countries: { filter } } = useSelector( state => state );
 
 
     const [ checking, setChecking ] = useState(true);
@@ -49,7 +49,7 @@ export const AppRouter = () => {
     useEffect(() => {
         dispatch(startLoadingData());
         setChecking(false);
-    }, [dispatch])
+    }, [dispatch, filter])
 
 
     if ( checking ) {
