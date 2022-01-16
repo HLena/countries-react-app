@@ -66,15 +66,15 @@ export const AppRouter = () => {
                 <div>
                     <Routes>
                         <Route 
-                            path = "/countries"
+                            path = "/countries/"
                             element = { <CountriesRoute/>}
                         >
                         </Route>
                         <Route
-                            exact 
-                            path = "/countries/:countryName"
+                            
+                            path = "country/:countryName"
                             element = {<CountryRoute/> }
-                        />
+                        ></Route>
 
                     </Routes>
                     

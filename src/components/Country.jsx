@@ -1,5 +1,7 @@
 import styled from 'styled-components'
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from "react-router-dom";
+import { setCountrySelected } from '../actions/countries';
 
 const CountryStyled = styled.div`
     width: 264px;
@@ -23,7 +25,11 @@ const CountryStyled = styled.div`
         font-size: .9em;
         margin-bottom: .5rem;
     }
+    a{
+        text-decoration: none;
+    }
     button{
+        cursor: pointer;
         width: 80%;
         display: block;
         margin: auto;
@@ -52,20 +58,58 @@ const CountryStyled = styled.div`
 `
 
 
-export const Country = ({name, flag, capital, region, population}) => {
+export const Country = ({
+    name, 
+    flag,
+    capital,
+    region,
+    population,
+    languages,
+    continents,
+    coatOfArms,
+    maps,
+    latlng}) => {
 
     const { theme } = useSelector( state => state.ui );
+    const dispatch = useDispatch();
+
+    const handleOnClinckCountry = () => {
+        dispatch(setCountrySelected({
+            name,
+            flag,
+            capital,
+            region,
+            population,
+            languages,
+            continents,
+            coatOfArms,
+            maps,
+            latlng
+        }))
+        
+    }
 
     return (
         <CountryStyled theme={theme}>
             <img src={flag} alt={`${name}-country`} />
             <div className = "details">
                 <h2>{name}</h2>
-                <p><strong>Capital: </strong>{capital}</p>
-                <p><strong>Region: </strong>{region}</p>
-                <p><strong>Population: </strong>{population}</p>
+                {
+                    capital &&
+                    <p><strong>Capital: </strong>{capital}</p>
+                }
+                {
+                    region &&
+                    <p><strong>Region: </strong>{region}</p>
+                }
+                {
+                    population > 0 &&
+                    <p><strong>Population: </strong>{population}</p>
+                }
             </div>
-            <button>See More</button>
+            <Link to={`/country/${name}`}>
+                <button onClick = { handleOnClinckCountry }>See More</button>
+            </Link>
         </CountryStyled>
     )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
-import { useDispatch, useSelector} from 'react-redux';
+import { useSelector} from 'react-redux';
 import styled from 'styled-components';
-
 import { Country } from '../components/Country';
 import { FilterApp } from '../components/FilterApp';
 
@@ -30,9 +29,10 @@ export const CountriesRoute = () => {
             <FilterApp/>
             <CountriesStyled>
                 {
-                    countries?.map(({name, population, capital, region, flags}) => {
+                    countries?.map(({name, population, capital, region, flags, ...rest}) => {
                         return (
                             <Country
+                                {...rest}
                                 key = {`${name?.common}-country`}
                                 name = { name?.common}
                                 population={population}

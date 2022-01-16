@@ -33,6 +33,11 @@ export const setContryRegion = (region) => ({
     payload: region
 })
 
+export const setCountrySelected = (country) => ({
+    type: types.countriesSelected,
+    payload: country
+})
+
 export const startLoadingData = () => {
     return async (dispatch, getState) => {
 

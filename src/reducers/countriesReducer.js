@@ -33,6 +33,12 @@ export const countriesReducer = ( state = initialState, action ) => {
                     region: action.payload
                 }
             }
+            case types.countriesSelected:
+                return {
+                    ...state,
+                    selected: action.payload
+                    
+                }
         default:
             return state;
     }
